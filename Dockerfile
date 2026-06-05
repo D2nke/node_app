@@ -1,12 +1,12 @@
-FROM maven:3.9-eclipse-temurin-17-alpine AS builder
+FROM node:20-alpine AS builder
 WORKDIR /app
-COPY pom.xml .
-RUN mvn dependency:go-offline -B
-COPY src ./src
-RUN mvn package -DskipTests -B
+COPY package*.json ./
+RUN npm ci --only=production
 
-FROM eclipse-temurin:17-jre-alpine
+FROM node:20-alpine
 WORKDIR /app
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder /app/node_modules ./node_modules
+COPY src ./src
+COPY package.json .
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "app.jar"]
+CMD ["node", "src/index.js"]
