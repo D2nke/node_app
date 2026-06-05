@@ -1,4 +1,4 @@
-# my_apps_demo — Node branch
+# Node branch
 
 Demo app showing how to use [my_workflows](https://github.com/D2nke/my_workflows) reusable workflows in a Node.js (Express) stack.
 
