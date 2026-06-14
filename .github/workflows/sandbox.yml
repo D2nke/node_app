@@ -21,18 +21,18 @@ jobs:
   pre-build:
     name: Pre-Build Validation
     needs: sandbox-info
-    uses: D2nke/my_workflows/.github/workflows/pre-build.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/pre-build.yml@fix/bugs
 
   tests:
     name: Unit Tests
     needs: pre-build
-    uses: D2nke/my_workflows/.github/workflows/test-node.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/test-node.yml@fix/bugs
     secrets: inherit
 
   security:
     name: Security Scan
     needs: tests
-    uses: D2nke/my_workflows/.github/workflows/security-scan.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/security-scan.yml@fix/bugs
     with:
       sonar_project_key: ${{ github.repository_owner }}-${{ github.event.repository.name }}-dev
       sonar_organization: ${{ vars.SONAR_ORGANIZATION || '' }}
@@ -44,7 +44,7 @@ jobs:
   docker-build:
     name: Build Docker Image
     needs: security
-    uses: D2nke/my_workflows/.github/workflows/build-docker.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/build-docker.yml@fix/bugs
     with:
       image_name: docker.io/${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}
       dockerfile: ./Dockerfile
@@ -55,7 +55,7 @@ jobs:
   sandbox-deploy:
     name: "🚀 Deploy to Sandbox"
     needs: docker-build
-    uses: D2nke/my_workflows/.github/workflows/deploy.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/deploy.yml@fix/bugs
     with:
       fly_app: ${{ vars.FLY_APP_DEV }}
       environment: dev
