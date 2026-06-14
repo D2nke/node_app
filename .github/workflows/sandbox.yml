@@ -70,7 +70,6 @@ jobs:
     if: always()
     uses: D2nke/my_workflows/.github/workflows/deploy.yml@fix/bugs
     with:
-      fly_app: ${{ vars.FLY_APP_DEV }}
       environment: dev
       image_name: docker.io/${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}
       image_tag: ${{ github.sha }}-dev
