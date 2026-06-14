@@ -1,0 +1,24 @@
+{
+  "name": "my-apps-demo-node",
+  "version": "1.0.0",
+  "description": "Demo Node.js app using my_workflows reusable CI/CD",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "jest --coverage --coverageReporters=lcov --coverageReporters=text"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^6.3.4"
+  },
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "lines": 70
+      }
+    }
+  }
+}

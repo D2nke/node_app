@@ -1,3 +1,8 @@
+# Node
+node_modules/
+coverage/
+dist/
+
 # Java
 target/
 *.class
