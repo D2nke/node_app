@@ -9,18 +9,18 @@ on:
 jobs:
   pre-build:
     name: Pre-Build Validation
-    uses: D2nke/my_workflows/.github/workflows/pre-build.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/pre-build.yml@fix/bugs
 
   tests:
     name: Unit Tests
     needs: pre-build
-    uses: D2nke/my_workflows/.github/workflows/test-node.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/test-node.yml@fix/bugs
     secrets: inherit
 
   security-scan:
     name: Security Scan (Snyk + SonarQube)
     needs: tests
-    uses: D2nke/my_workflows/.github/workflows/security-scan.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/security-scan.yml@fix/bugs
     with: 
       sonar_project_key: ${{ github.repository_owner }}-${{ github.event.repository.name }}
       sonar_organization: ${{ vars.SONAR_ORGANIZATION || '' }}
@@ -32,7 +32,7 @@ jobs:
   docker-build:
     name: Build Docker Image
     needs: security-snyk
-    uses: D2nke/my_workflows/.github/workflows/build-docker.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/build-docker.yml@fix/bugs
     with:
       image_name: docker.io/${{ secrets.DOCKER_USERNAME }}/my-app
       dockerfile: ./Dockerfile
@@ -43,10 +43,9 @@ jobs:
   deploy:
     name: Deploy Application
     needs: docker-build
-    uses: D2nke/my_workflows/.github/workflows/deploy.yml@latest
+    uses: D2nke/my_workflows/.github/workflows/deploy.yml@fix/bugs
     with:
       target: server
       environment: prd
       image_name: docker.io/${{ secrets.DOCKER_USERNAME }}/my-app
     secrets: inherit
-    continue-on-error: true
