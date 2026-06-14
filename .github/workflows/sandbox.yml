@@ -67,6 +67,7 @@ jobs:
   sandbox-deploy:
     name: "🚀 Deploy to Sandbox"
     needs: docker-build
+    if: always()
     uses: D2nke/my_workflows/.github/workflows/deploy.yml@fix/bugs
     with:
       fly_app: ${{ vars.FLY_APP_DEV }}
