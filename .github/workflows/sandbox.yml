@@ -46,10 +46,11 @@ jobs:
     needs: security
     uses: D2nke/my_workflows/.github/workflows/build-docker.yml@latest
     with:
-      image_name: docker.io/${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
+      image_name: docker.io/${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}
       dockerfile: ./Dockerfile
       context: .
       tag: ${{ github.sha }}-dev
+    secrets: inherit
 
   sandbox-deploy:
     name: "🚀 Deploy to Sandbox"
@@ -58,6 +59,6 @@ jobs:
     with:
       fly_app: ${{ vars.FLY_APP_DEV }}
       environment: dev
-      image_name: docker.io/${{ secrets.DOCKER_USERNAME }}/${{ github.event.repository.name }}
+      image_name: docker.io/${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}
       image_tag: ${{ github.sha }}-dev
     secrets: inherit
