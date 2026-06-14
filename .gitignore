@@ -3,6 +3,11 @@ node_modules/
 coverage/
 dist/
 
+# Java
+target/
+*.class
+*.jar
+
 # General
 .env
 *.log
