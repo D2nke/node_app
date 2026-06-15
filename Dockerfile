@@ -6,7 +6,7 @@ RUN npm ci --only=production
 FROM node:20-alpine
 WORKDIR /app
 COPY --from=builder /app/node_modules ./node_modules
-LABEL org.opencontainers.image.source=https://github.com/D2nke/node_app
+LABEL org.opencontainers.image.source="https://github.com/D2nke/node_app"
 COPY src ./src
 COPY package.json .
 EXPOSE 8080
