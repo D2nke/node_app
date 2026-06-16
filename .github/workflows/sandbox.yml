@@ -11,8 +11,10 @@ on:
         default: false
       enable-snyk:
         type: boolean
-        default: false      
-
+        default: false
+      enable-build:
+        type: boolean
+        default: false
 jobs:
   sandbox-info:
     name: "ℹ️  Sandbox Deployment Info"
@@ -55,7 +57,7 @@ jobs:
   docker-build:
     name: Build Docker Image
     needs: security
-    if: always()
+    if: ${{ inputs.enable-build }}
     uses: D2nke/my_workflows/.github/workflows/build-docker.yml@fix/bugs
     with:
       image_name: docker.io/${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}
