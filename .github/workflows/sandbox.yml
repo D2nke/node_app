@@ -16,7 +16,7 @@ on:
 jobs:
   node-sandbox-build:
     name: "🚀 Node Build Sandbox"
-    uses: D2nke/my_workflows/node_build.yml@feat/new_base
+    uses: D2nke/my_workflows/.github/workflows/node_build.yml@feat/new_base
     with:
       enable-test: ${{ inputs.enable-test }}
       enable-sonar: ${{ inputs.enable-sonar }}
