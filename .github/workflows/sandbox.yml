@@ -72,5 +72,4 @@ jobs:
     with:
       environment: dev
       image_name: docker.io/${{ vars.DOCKER_USERNAME }}/${{ github.event.repository.name }}
-      image_tag: ${{ github.sha }}-dev
     secrets: inherit
