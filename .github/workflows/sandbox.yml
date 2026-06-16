@@ -20,7 +20,7 @@ jobs:
     with:
       enable-test: ${{ inputs.enable-test }}
       enable-sonar: ${{ inputs.enable-sonar }}
-      enable-snky: ${{ inputs.enable-snky }}
+      enable-snyk: ${{ inputs.enable-snyk }}
     secrets: inherit
 
   # node-sandbox-deploy:
